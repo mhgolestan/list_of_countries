@@ -1,23 +1,23 @@
 import React from "react";
 import Weather from "./Weather";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+  Grid,
+} from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
   media: {
-    spacing: 20,
     height: 140,
   },
-}));
+});
 
 const CountriesList = ({ countriesToShow, setFilteredCountries }) => {
   const classes = useStyles();
@@ -49,36 +49,29 @@ const CountriesList = ({ countriesToShow, setFilteredCountries }) => {
   } else {
     console.log(countriesToShow);
     return (
-      <div>
+      <Grid container spacing={2}>
         {countriesToShow.map((country, i) => (
-          <Card className={classes.root} key={i}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={country.flag}
-                title="?"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {country.name}
-                </Typography>
-                {/*<Typography variant="body2" color="textSecondary" component="p">
+          <Grid item xs={12} sm={6} md={4}>
+            <Card className={classes.root} key={i}>
+              <CardActionArea onClick={() => handleClick(country.name)}>
+                <CardMedia
+                  className={classes.media}
+                  image={country.flag}
+                  title="?"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {country.name}
+                  </Typography>
+                  {/*<Typography variant="body2" color="textSecondary" component="p">
                   {`dscds`}
         </Typography>*/}
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => handleClick(country.name)}
-              >
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     );
   }
 };
