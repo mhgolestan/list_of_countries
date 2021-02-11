@@ -1,6 +1,10 @@
 import React from "react";
 import LastCountry from "./LastCountry";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  ThemeProvider,
+  createMuiTheme,
+} from "@material-ui/core/styles";
 import {
   Card,
   CardActionArea,
@@ -19,6 +23,12 @@ const useStyles = makeStyles({
   },
 });
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: ["Chilanka", "cursive"].join(","),
+  },
+});
+
 const CountriesList = ({ countriesToShow, setFilteredCountries }) => {
   const classes = useStyles();
 
@@ -26,7 +36,7 @@ const CountriesList = ({ countriesToShow, setFilteredCountries }) => {
     setFilteredCountries(countryName);
   };
 
-  if (countriesToShow.length === 250) {
+  if (countriesToShow.length > 100) {
     return <div></div>;
   } else if (countriesToShow.length === 1) {
     return (
@@ -39,9 +49,16 @@ const CountriesList = ({ countriesToShow, setFilteredCountries }) => {
       />
     );
   } else if (countriesToShow.length > 10) {
-    return <p>{"Too many matches"}</p>;
+    return (
+      <Grid container justify="center">
+        <ThemeProvider theme={theme}>
+          <div>
+            <Typography variant="h4">Too many matches</Typography>
+          </div>
+        </ThemeProvider>
+      </Grid>
+    );
   } else {
-    console.log(countriesToShow);
     return (
       <Grid container spacing={2}>
         {countriesToShow.map((country, i) => (
