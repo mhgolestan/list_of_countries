@@ -1,5 +1,5 @@
 import React from "react";
-import Weather from "./Weather";
+import LastCountry from "./LastCountry";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -27,22 +27,16 @@ const CountriesList = ({ countriesToShow, setFilteredCountries }) => {
   };
 
   if (countriesToShow.length === 250) {
-    return <div>Insert the name of the country</div>;
+    return <div></div>;
   } else if (countriesToShow.length === 1) {
     return (
-      <div>
-        <h1>{countriesToShow[0].name}</h1>
-        <p>Capital: {countriesToShow[0].capital}</p>
-        <p>Population: {countriesToShow[0].population}</p>
-        <h2>Languages:</h2>
-        <ul>
-          {countriesToShow[0].languages.map((language, i) => (
-            <li key={i}>{language.name}</li>
-          ))}
-        </ul>
-        <img src={countriesToShow[0].flag} alt="flag" />
-        <Weather city={countriesToShow[0].capital} />
-      </div>
+      <LastCountry
+        name={countriesToShow[0].name}
+        capital={countriesToShow[0].capital}
+        population={countriesToShow[0].population}
+        languages={countriesToShow[0].languages}
+        flag={countriesToShow[0].flag}
+      />
     );
   } else if (countriesToShow.length > 10) {
     return <p>{"Too many matches"}</p>;
@@ -57,15 +51,12 @@ const CountriesList = ({ countriesToShow, setFilteredCountries }) => {
                 <CardMedia
                   className={classes.media}
                   image={country.flag}
-                  title="?"
+                  title={country.name}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h5" component="h4">
                     {country.name}
                   </Typography>
-                  {/*<Typography variant="body2" color="textSecondary" component="p">
-                  {`dscds`}
-        </Typography>*/}
                 </CardContent>
               </CardActionArea>
             </Card>

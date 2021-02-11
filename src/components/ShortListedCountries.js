@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ShortListedCountries = (id, handleClick) => {
+const ShortListedCountries = ({ id, handleClick }) => {
   const classes = useStyles();
 
   return (
